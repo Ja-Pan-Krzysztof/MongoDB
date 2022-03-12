@@ -1,3 +1,4 @@
+#!C:\Python_3.10\bazy danych\Scripts\python
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from pandas import DataFrame
@@ -80,6 +81,24 @@ def find_one(collection: str, query: dict, column: list = None):
     #    {'name': 'Adam'},
     #    column=['name', 'age', 'surname']
     # ))
+
+
+def find_dataframe(collection: str, query: dict, column: list = None):
+    table = db[collection]
+    if column is None:
+        data = table.find(query)
+        return DataFrame(data)
+    else:
+        for result in table.find(query):
+            a = 0
+            wynik = []
+            for _ in column:
+                wynik.append(result[column[a]])
+                a += 1
+            print(wynik)
+            
+
+print(find_dataframe('person', {'age': {'$ne': 18}}, column=['name', 'age']))
 
 
 

@@ -1,13 +1,15 @@
+#!C:\Python_3.10\bazy danych\Scripts\python
 from pymongo import MongoClient
 from datetime import datetime
 from pprint import pprint
 from pandas import DataFrame
 from bson.objectid import ObjectId
 from PIL import Image
-import logging, typing
+import logging
+import typing
 
 
-class Datebase(object):
+class Datebase:
     URI = 'mongodb://localhost:27017'
     DATEBASE = None
 
@@ -18,8 +20,7 @@ class Datebase(object):
 
     @staticmethod
     def insert_one(collection: str, data):
-        """
-        Co należy podać do funkcji
+        """Co należy podać do funkcji.
         :param collection: str Nazwa kolekcji w mongoDB
         :param data: dist Co na co chcemy zamienić {'name':'foo'}, {'name':'haha}
         :return: 
@@ -70,10 +71,20 @@ class Datebase(object):
         }
         return person_post
 
+    @staticmethod
+    def delete_one(collection: str, query):
+        print('Usunięto.')
+        return Datebase.DATEBASE[collection].delete_one(query)
+
+    @staticmethod
+    def delete_many(collection: str, query):
+        print('Usunięto.')
+        return Datebase.DATEBASE[collection].delete_many(query)
+
 
 db = Datebase()
 db.initialize('market')
-db.update_one('person', {'$set': {'price': 25.25}})
+
 
 
 
