@@ -1,0 +1,5 @@
+pymongo
+bson
+pandas
+numpy
+PIL
